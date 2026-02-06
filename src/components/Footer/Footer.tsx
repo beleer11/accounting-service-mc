@@ -12,10 +12,12 @@ import {
     Instagram,
     CheckCircle
 } from 'lucide-react';
+import { useDeviceDetection } from '../../hooks/useDeviceDetection';
 
 const Footer = () => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.3 });
+    const deviceInfo = useDeviceDetection();
+    const isInView = useInView(ref, { once: true, amount: deviceInfo.isMobile ? 0.1 : 0.3 });
 
     const [formData, setFormData] = useState({
         name: '',

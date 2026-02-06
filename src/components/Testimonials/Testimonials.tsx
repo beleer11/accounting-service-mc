@@ -11,13 +11,16 @@ import {
     Shield,
     Calendar
 } from 'lucide-react';
+import { useDeviceDetection } from '../../hooks/useDeviceDetection';
 
 const Testimonials = () => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.3 });
+    const testimonialsContainerRef = useRef(null);
+    const deviceInfo = useDeviceDetection();
+    const isInView = useInView(ref, { once: true, amount: deviceInfo.isMobile ? 0.1 : 0.3 });
+
     const [activeTestimonial, setActiveTestimonial] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
-    const testimonialsContainerRef = useRef(null);
 
     const testimonials = [
         {

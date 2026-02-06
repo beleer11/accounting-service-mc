@@ -8,10 +8,12 @@ import {
     Zap
 } from 'lucide-react';
 import ServiceModal from '../shared/ServiceModal/ServiceModal';
+import { useDeviceDetection } from '../../hooks/useDeviceDetection';
 
 const Services = () => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.2 });
+    const deviceInfo = useDeviceDetection();
+    const isInView = useInView(ref, { once: true, amount: deviceInfo.isMobile ? 0.1 : 0.2 });
 
     const [selectedService, setSelectedService] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
