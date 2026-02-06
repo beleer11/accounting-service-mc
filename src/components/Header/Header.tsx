@@ -62,7 +62,7 @@ const Header = () => {
                         className="flex items-center gap-3 cursor-pointer"
                     >
                         <img
-                            src="/public/servicioscontablesmcmovile.png"
+                            src={`${import.meta.env.BASE_URL}assets/servicioscontablesmcmovile.png`}
                             alt="Logo Servicios Contables MC"
                             className="h-9 w-auto object-cover rounded-lg"
                         />
