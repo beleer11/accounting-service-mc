@@ -165,7 +165,7 @@ const Testimonials = () => {
     }, []);
 
     return (
-        <section ref={ref} className="py-12 sm:py-16 md:py-20 px-4 relative overflow-hidden">
+        <section ref={ref} className="py-10 sm:py-16 md:py-20 px-4 relative overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
                 {[...Array(8)].map((_, i) => (
                     <motion.div

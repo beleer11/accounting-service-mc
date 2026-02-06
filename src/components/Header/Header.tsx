@@ -70,7 +70,7 @@ const Header = () => {
                         />
                         <div>
                             <h1 className="text-slate-900 dark:text-white text-xl font-bold font-display">
-                                Servicios Contables MC
+                                {import.meta.env.VITE_COMPANY_NAME}
                             </h1>
                             <p className="text-xs text-slate-500 dark:text-slate-400">
                                 Expertos en Colombia
@@ -78,7 +78,6 @@ const Header = () => {
                         </div>
                     </motion.div>
 
-                    {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-8">
                         {menuItems.map((item) => (
                             <motion.button
@@ -101,7 +100,6 @@ const Header = () => {
                         </motion.button>
                     </div>
 
-                    {/* Mobile Menu Button */}
                     <motion.button
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -112,7 +110,6 @@ const Header = () => {
                     </motion.button>
                 </div>
 
-                {/* Mobile Menu */}
                 <AnimatePresence>
                     {isMenuOpen && (
                         <motion.div

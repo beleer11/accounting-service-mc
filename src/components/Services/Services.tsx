@@ -112,7 +112,7 @@ const Services = () => {
     };
 
     return (
-        <section ref={ref} id="servicios" className="py-20 px-4 md:px-8 bg-gradient-to-b from-white to-slate-50 dark:from-background-dark dark:to-slate-900">
+        <section ref={ref} id="servicios" className="md:py-20 py-10 px-4 md:px-8 bg-gradient-to-b from-white to-slate-50 dark:from-background-dark dark:to-slate-900">
             <div className="container mx-auto max-w-7xl">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}

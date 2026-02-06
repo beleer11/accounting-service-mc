@@ -69,7 +69,7 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
+            <div className="relative z-10 container mx-auto px-4 py-10 md:py-32">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
@@ -103,7 +103,7 @@ const Hero = () => {
 
                     <motion.div
                         variants={itemVariants}
-                        className="flex flex-col sm:flex-row gap-4 mb-12"
+                        className="flex flex-col sm:flex-row gap-4 md:mb-12 mb-5"
                     >
                         <motion.button
                             variants={buttonVariants}

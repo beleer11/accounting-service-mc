@@ -42,19 +42,19 @@ const Footer = () => {
         {
             icon: <Phone className="w-6 h-6" />,
             title: "Teléfono",
-            value: "+57 312 4420185",
+            value: import.meta.env.VITE_NUMBER_PHONE,
             sub: "Lunes a Viernes 8am - 6pm"
         },
         {
             icon: <Mail className="w-6 h-6" />,
             title: "Email",
-            value: "i_munce@hotmail.co",
+            value: import.meta.env.VITE_COMPANY_EMAIL,
             sub: "Respuesta en menos de 24h"
         },
         {
             icon: <MapPin className="w-6 h-6" />,
             title: "Oficina Principal",
-            value: "Calle 100 # 8-60, Campoalegre/Huila",
+            value: import.meta.env.VITE_COMPANY_ADDRESS,
             sub: "Barrio Panamá"
         }
     ];
@@ -98,7 +98,7 @@ const Footer = () => {
             <div className="relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/10" />
 
-                <div className="container mx-auto px-4 md:px-8 py-20 relative">
+                <div className="container mx-auto px-4 md:px-8 md:py-20 py-10 relative">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -362,7 +362,7 @@ const Footer = () => {
                                 </a>
                             </div>
                             <p className="text-sm text-slate-500 text-center lg:text-right">
-                                © 2026 Servicios Contables MC. Todos los derechos reservados.
+                                © 2026 {import.meta.env.VITE_COMPANY_NAME}. Todos los derechos reservados.
                                 <br />
                                 NIT: 901.234.567-8 | Cámara de Comercio del Huila
                             </p>
