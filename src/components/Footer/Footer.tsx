@@ -33,8 +33,6 @@ const Footer = () => {
         'Declaración de Renta',
         'Nómina Electrónica',
         'Outsourcing Contable',
-        'Auditoría',
-        'Consultoría Financiera',
         'Software Contable'
     ];
 
@@ -42,20 +40,20 @@ const Footer = () => {
         {
             icon: <Phone className="w-6 h-6" />,
             title: "Teléfono",
-            value: "+57 1 234 5678",
+            value: "+57 312 4420185",
             sub: "Lunes a Viernes 8am - 6pm"
         },
         {
             icon: <Mail className="w-6 h-6" />,
             title: "Email",
-            value: "contacto@contaduriapro.co",
+            value: "i_munce@hotmail.co",
             sub: "Respuesta en menos de 24h"
         },
         {
             icon: <MapPin className="w-6 h-6" />,
             title: "Oficina Principal",
-            value: "Calle 100 # 8-60, Bogotá",
-            sub: "Centro empresarial San Fernando"
+            value: "Calle 100 # 8-60, Campoalegre/Huila",
+            sub: "Barrio Panamá"
         }
     ];
 
@@ -95,9 +93,8 @@ const Footer = () => {
 
     return (
         <footer ref={ref} className="bg-slate-900 text-white">
-            {/* Sección de contacto */}
             <div className="relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent-mint/10" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/10" />
 
                 <div className="container mx-auto px-4 md:px-8 py-20 relative">
                     <motion.div
@@ -106,14 +103,11 @@ const Footer = () => {
                         className="max-w-6xl mx-auto"
                     >
                         <div className="text-center mb-16">
-                            <div className="inline-flex p-4 bg-accent-mint/10 rounded-2xl mb-6">
-                                <Send className="w-12 h-12 text-accent-mint" />
-                            </div>
-                            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-display">
+                            <h2 className="text-4xl md:text-5xl font-bold p-4 mb-6 font-display">
                                 ¿Listo para escalar su negocio?
                             </h2>
                             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-                                Únase a más de 500 empresas y profesionales independientes que confían su gestión contable en nosotros.
+                                Únase a más de 20 empresas y profesionales independientes que confían su gestión contable en nosotros.
                             </p>
                         </div>
 
@@ -137,7 +131,7 @@ const Footer = () => {
                                             exit={{ opacity: 0, scale: 0.9 }}
                                             className="text-center py-12"
                                         >
-                                            <CheckCircle className="w-20 h-20 text-accent-mint mx-auto mb-6" />
+                                            <CheckCircle className="w-20 h-20 text-secondary mx-auto mb-6" />
                                             <h4 className="text-2xl font-bold mb-4">
                                                 ¡Mensaje enviado con éxito!
                                             </h4>
@@ -158,7 +152,7 @@ const Footer = () => {
                                                         value={formData.name}
                                                         onChange={handleChange}
                                                         required
-                                                        className="w-full h-14 bg-slate-900 border border-slate-700 rounded-xl px-5 focus:ring-2 focus:ring-accent-mint focus:border-transparent transition-all"
+                                                        className="w-full h-14 bg-slate-900 border border-slate-700 rounded-xl px-5 focus:ring-2 focus:ring-secondary focus:border-transparent transition-all"
                                                         placeholder="Ej: Carlos Gómez o Tech Solutions"
                                                     />
                                                 </div>
@@ -172,7 +166,7 @@ const Footer = () => {
                                                         value={formData.email}
                                                         onChange={handleChange}
                                                         required
-                                                        className="w-full h-14 bg-slate-900 border border-slate-700 rounded-xl px-5 focus:ring-2 focus:ring-accent-mint focus:border-transparent transition-all"
+                                                        className="w-full h-14 bg-slate-900 border border-slate-700 rounded-xl px-5 focus:ring-2 focus:ring-secondary focus:border-transparent transition-all"
                                                         placeholder="correo@corporativo.com"
                                                     />
                                                 </div>
@@ -189,7 +183,7 @@ const Footer = () => {
                                                         value={formData.phone}
                                                         onChange={handleChange}
                                                         required
-                                                        className="w-full h-14 bg-slate-900 border border-slate-700 rounded-xl px-5 focus:ring-2 focus:ring-accent-mint focus:border-transparent transition-all"
+                                                        className="w-full h-14 bg-slate-900 border border-slate-700 rounded-xl px-5 focus:ring-2 focus:ring-secondary focus:border-transparent transition-all"
                                                         placeholder="+57 300 123 4567"
                                                     />
                                                 </div>
@@ -202,7 +196,7 @@ const Footer = () => {
                                                         value={formData.service}
                                                         onChange={handleChange}
                                                         required
-                                                        className="w-full h-14 bg-slate-900 border border-slate-700 rounded-xl px-5 focus:ring-2 focus:ring-accent-mint focus:border-transparent transition-all"
+                                                        className="w-full h-14 bg-slate-900 border border-slate-700 rounded-xl px-5 focus:ring-2 focus:ring-secondary focus:border-transparent transition-all"
                                                     >
                                                         <option value="">Seleccione un servicio</option>
                                                         {services.map(service => (
@@ -221,7 +215,7 @@ const Footer = () => {
                                                     value={formData.message}
                                                     onChange={handleChange}
                                                     rows={4}
-                                                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-5 py-4 focus:ring-2 focus:ring-accent-mint focus:border-transparent transition-all resize-none"
+                                                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-5 py-4 focus:ring-2 focus:ring-secondary focus:border-transparent transition-all resize-none"
                                                     placeholder="Cuéntenos sobre su negocio y necesidades específicas..."
                                                 />
                                             </div>
@@ -233,12 +227,12 @@ const Footer = () => {
                                                 whileTap={{ scale: 0.98 }}
                                                 className={`w-full h-14 ${isSubmitting
                                                     ? 'bg-slate-700 cursor-not-allowed'
-                                                    : 'bg-accent-mint hover:bg-accent-mint/90'
-                                                    } text-slate-900 font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3`}
+                                                    : 'bg-secondary hover:bg-green-600'
+                                                    } text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-3`}
                                             >
                                                 {isSubmitting ? (
                                                     <>
-                                                        <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
+                                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                                                         Enviando...
                                                     </>
                                                 ) : (
@@ -258,9 +252,8 @@ const Footer = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                                 transition={{ delay: 0.4 }}
-                                className="space-y-8"
                             >
-                                <div>
+                                <div className="mb-8">
                                     <h3 className="text-2xl font-bold mb-6">
                                         Información de contacto
                                     </h3>
@@ -288,7 +281,7 @@ const Footer = () => {
                                 </div>
 
                                 {/* Horarios de atención */}
-                                <div className="bg-gradient-to-br from-primary/20 to-accent-mint/10 rounded-2xl p-6">
+                                <div className="bg-gradient-to-br from-primary/20 to-secondary/10 rounded-2xl p-6">
                                     <h4 className="font-bold text-xl mb-4">Horarios de atención</h4>
                                     <div className="space-y-3">
                                         {[
@@ -303,76 +296,75 @@ const Footer = () => {
                                         ))}
                                     </div>
                                 </div>
-
-                                {/* Redes sociales */}
-                                <div>
-                                    <h4 className="font-bold text-xl mb-4">Síganos</h4>
-                                    <div className="flex gap-4">
-                                        {socialLinks.map((social, index) => (
-                                            <motion.a
-                                                key={social.label}
-                                                href={social.href}
-                                                initial={{ opacity: 0, scale: 0 }}
-                                                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                                                transition={{ delay: 0.8 + index * 0.1 }}
-                                                whileHover={{ scale: 1.1, y: -2 }}
-                                                whileTap={{ scale: 0.9 }}
-                                                className="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl transition-colors"
-                                                aria-label={social.label}
-                                            >
-                                                {social.icon}
-                                            </motion.a>
-                                        ))}
-                                    </div>
-                                </div>
                             </motion.div>
                         </div>
                     </motion.div>
                 </div>
             </div>
 
-            {/* Copyright y enlaces */}
-            <div className="border-t border-slate-800 py-8">
+            {/* Sección inferior del Footer con redes sociales */}
+            <div className="border-t border-slate-800 py-12">
                 <div className="container mx-auto px-4 md:px-8">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
                         {/* Logo y copyright */}
                         <div className="flex items-center gap-3">
-                            <div className="bg-accent-mint p-2 rounded-lg">
-                                <Send className="w-6 h-6 text-slate-900" />
-                            </div>
+                            <img
+                                src="/public/servicioscontablesmcmovile.png"
+                                alt="Logo Servicios Contables MC"
+                                className="h-9 w-auto object-cover rounded-lg"
+                            />
                             <div>
-                                <h4 className="font-bold text-lg">Contaduría Pro</h4>
+                                <h4 className="font-bold text-lg">Servicios Contables MC</h4>
                                 <p className="text-sm text-slate-400">
                                     Expertos contables en Colombia desde 2010
                                 </p>
                             </div>
                         </div>
 
-                        {/* Enlaces legales */}
-                        <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
-                            <a href="#" className="hover:text-white transition-colors">
-                                Términos Legales
-                            </a>
-                            <a href="#" className="hover:text-white transition-colors">
-                                Política de Privacidad
-                            </a>
-                            <a href="#" className="hover:text-white transition-colors">
-                                Cookies
-                            </a>
-                            <a href="#" className="hover:text-white transition-colors">
-                                Contacto
-                            </a>
+                        {/* Redes sociales */}
+                        <div className="text-center lg:text-left">
+                            <h4 className="font-bold text-lg mb-4">Síganos</h4>
+                            <div className="flex gap-4 justify-center lg:justify-start">
+                                {socialLinks.map((social, index) => (
+                                    <motion.a
+                                        key={social.label}
+                                        href={social.href}
+                                        initial={{ opacity: 0, scale: 0 }}
+                                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                                        transition={{ delay: 0.8 + index * 0.1 }}
+                                        whileHover={{ scale: 1.1, y: -2 }}
+                                        whileTap={{ scale: 0.9 }}
+                                        className="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl transition-colors"
+                                        aria-label={social.label}
+                                    >
+                                        {social.icon}
+                                    </motion.a>
+                                ))}
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Copyright */}
-                    <div className="text-center mt-8 pt-8 border-t border-slate-800">
-                        <p className="text-sm text-slate-500">
-                            © 2024 Contaduría Pro SAS. Todos los derechos reservados.
-                            <br className="md:hidden" />
-                            <span className="hidden md:inline"> | </span>
-                            NIT: 901.234.567-8 | Cámara de Comercio de Bogotá
-                        </p>
+                        {/* Enlaces legales */}
+                        <div className="flex flex-col items-center lg:items-end gap-3">
+                            <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+                                <a href="#" className="hover:text-white transition-colors">
+                                    Términos Legales
+                                </a>
+                                <a href="#" className="hover:text-white transition-colors">
+                                    Política de Privacidad
+                                </a>
+                                <a href="#" className="hover:text-white transition-colors">
+                                    Cookies
+                                </a>
+                                <a href="#" className="hover:text-white transition-colors">
+                                    Contacto
+                                </a>
+                            </div>
+                            <p className="text-sm text-slate-500 text-center lg:text-right">
+                                © 2026 Servicios Contables MC. Todos los derechos reservados.
+                                <br />
+                                NIT: 901.234.567-8 | Cámara de Comercio del Huila
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

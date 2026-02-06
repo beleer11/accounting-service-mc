@@ -41,7 +41,7 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative min-h-screen overflow-hidden flex items-center">
+        <section className="relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary to-blue-900">
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=2000')] bg-cover bg-center opacity-10" />
 
@@ -69,7 +69,7 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 w-full">
+            <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"

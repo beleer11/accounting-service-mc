@@ -8,24 +8,21 @@ export default {
     theme: {
         extend: {
             colors: {
-                // Colores corporativos MC
-                "primary": "#1e40af",       // Azul principal
-                "secondary": "#10b981",     // Verde contable
-                "accent": "#3b82f6",        // Azul claro
-                "accent-green": "#34d399",  // Verde claro
+                "primary": "#1e40af",
+                "secondary": "#10b981",
+                "accent": "#3b82f6",
+                "accent-green": "#34d399",
 
-                // Fondos
                 "background-light": "#f9fafb",
                 "background-dark": "#111827",
 
-                // Textos
                 "text-primary": "#1f2937",
                 "text-secondary": "#4b5563",
             },
             fontFamily: {
                 "display": ["Poppins", "sans-serif"],
                 "body": ["Inter", "sans-serif"],
-                "serif": ["Merriweather", "serif"], // Para títulos formales
+                "serif": ["Merriweather", "serif"],
             },
             animation: {
                 'gradient': 'gradient 3s ease infinite',

@@ -1,6 +1,6 @@
 // src/components/Testimonials/Testimonials.jsx
 import { useState, useRef } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import {
     Star,
     Quote,
@@ -16,6 +16,7 @@ const Testimonials = () => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.3 });
     const [activeTestimonial, setActiveTestimonial] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     const testimonials = [
         {
@@ -58,26 +59,71 @@ const Testimonials = () => {
     ];
 
     const handleNext = () => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
         setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+        setTimeout(() => setIsTransitioning(false), 300);
     };
 
     const handlePrev = () => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
         setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+        setTimeout(() => setIsTransitioning(false), 300);
     };
 
     return (
         <section ref={ref} className="py-20 px-4 md:px-8 relative overflow-hidden">
-            {/* Fondo decorativo */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-100 dark:to-slate-900/30" />
+            <div className="absolute inset-0">
+                {[...Array(15)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute w-1 h-1 rounded-full"
+                        initial={{ y: -100, opacity: 0 }}
+                        animate={{
+                            y: [0, 800],
+                            opacity: [0, 1, 0],
+                        }}
+                        transition={{
+                            duration: Math.random() * 8 + 8,
+                            repeat: Infinity,
+                            delay: Math.random() * 3,
+                        }}
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            backgroundColor: 'rgba(59, 130, 246, 0.3)',
+                        }}
+                    />
+                ))}
+                {[...Array(10)].map((_, i) => (
+                    <motion.div
+                        key={`dark-${i}`}
+                        className="absolute w-1 h-1 rounded-full"
+                        initial={{ y: -100, opacity: 0 }}
+                        animate={{
+                            y: [0, 800],
+                            opacity: [0, 1, 0],
+                        }}
+                        transition={{
+                            duration: Math.random() * 10 + 10,
+                            repeat: Infinity,
+                            delay: Math.random() * 4,
+                        }}
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            backgroundColor: 'rgba(139, 92, 246, 0.3)',
+                        }}
+                    />
+                ))}
+            </div>
 
             <div className="container mx-auto max-w-7xl relative">
-                {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     className="text-center mb-16"
                 >
-                    <div className="inline-flex items-center gap-2 px-6 py-2 bg-primary/10 rounded-full mb-6">
+                    <div className="inline-flex items-center gap-2 px-6 py-2 bg-primary/10 dark:bg-primary/20 rounded-full mb-6">
                         <Quote className="w-5 h-5 text-primary dark:text-accent-mint" />
                         <span className="text-sm font-bold text-primary dark:text-accent-mint tracking-wider">
                             TESTIMONIOS
@@ -91,7 +137,6 @@ const Testimonials = () => {
                     </p>
                 </motion.div>
 
-                {/* Estadísticas */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -107,7 +152,7 @@ const Testimonials = () => {
                             whileHover={{ y: -5 }}
                             className="relative overflow-hidden rounded-2xl p-6 bg-white dark:bg-slate-800 shadow-lg group"
                         >
-                            <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
+                            <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity duration-500`} />
                             <div className="relative">
                                 <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${stat.color} text-white mb-4`}>
                                     {stat.icon}
@@ -123,27 +168,21 @@ const Testimonials = () => {
                     ))}
                 </motion.div>
 
-                {/* Carrusel de Testimonios */}
                 <div className="relative">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeTestimonial}
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -100 }}
-                            transition={{ duration: 0.5 }}
-                            className="bg-gradient-to-br from-primary to-blue-700 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl"
-                        >
-                            {/* Elementos decorativos */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
-                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full translate-y-48 -translate-x-48" />
+                    <div className="relative">
+                        <div className="bg-gradient-to-br from-primary to-blue-700 dark:from-blue-800 dark:to-blue-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32 pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full translate-y-48 -translate-x-48 pointer-events-none" />
 
                             <div className="relative z-10">
                                 <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
-                                    {/* Información del cliente */}
                                     <div className="flex-shrink-0">
                                         <div className="relative">
-                                            <img
+                                            <motion.img
+                                                key={`img-${activeTestimonial}`}
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ duration: 0.3 }}
                                                 src={testimonials[activeTestimonial].image}
                                                 alt={testimonials[activeTestimonial].name}
                                                 className="w-32 h-32 rounded-2xl object-cover border-4 border-white/20"
@@ -152,7 +191,13 @@ const Testimonials = () => {
                                                 <Quote className="w-6 h-6" />
                                             </div>
                                         </div>
-                                        <div className="mt-6">
+                                        <motion.div
+                                            key={`info-${activeTestimonial}`}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="mt-6"
+                                        >
                                             <h4 className="text-2xl font-bold">
                                                 {testimonials[activeTestimonial].name}
                                             </h4>
@@ -162,58 +207,82 @@ const Testimonials = () => {
                                             <div className="inline-flex items-center gap-2 mt-2 px-3 py-1 bg-white/10 rounded-full">
                                                 <span className="text-sm">{testimonials[activeTestimonial].company}</span>
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     </div>
 
-                                    {/* Contenido del testimonio */}
                                     <div className="flex-1">
                                         <div className="flex gap-1 mb-6">
                                             {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                                                <Star key={i} className="w-6 h-6 text-accent-mint fill-accent-mint" />
+                                                <motion.div
+                                                    key={i}
+                                                    initial={{ opacity: 0, scale: 0.5 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    transition={{ delay: i * 0.1 }}
+                                                >
+                                                    <Star className="w-6 h-6 text-accent-mint fill-accent-mint" />
+                                                </motion.div>
                                             ))}
                                         </div>
 
-                                        <p className="text-xl md:text-2xl italic mb-8 leading-relaxed">
+                                        <motion.p
+                                            key={`content-${activeTestimonial}`}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="text-xl md:text-2xl italic mb-8 leading-relaxed"
+                                        >
                                             "{testimonials[activeTestimonial].content}"
-                                        </p>
+                                        </motion.p>
 
                                         <div className="flex flex-wrap gap-6">
-                                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                                            <motion.div
+                                                key={`stats1-${activeTestimonial}`}
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.1 }}
+                                                className="bg-white/10 backdrop-blur-sm rounded-xl p-4"
+                                            >
                                                 <div className="text-2xl font-bold">{testimonials[activeTestimonial].stats.clients}</div>
                                                 <div className="text-sm text-blue-200">clientes atendidos</div>
-                                            </div>
-                                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                                            </motion.div>
+                                            <motion.div
+                                                key={`stats2-${activeTestimonial}`}
+                                                initial={{ opacity: 0, x: 20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.2 }}
+                                                className="bg-white/10 backdrop-blur-sm rounded-xl p-4"
+                                            >
                                                 <div className="text-2xl font-bold">{testimonials[activeTestimonial].stats.growth}</div>
                                                 <div className="text-sm text-blue-200">crecimiento anual</div>
-                                            </div>
+                                            </motion.div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </motion.div>
-                    </AnimatePresence>
+                        </div>
+                    </div>
 
-                    {/* Controles del carrusel */}
                     <div className="flex justify-center gap-4 mt-8">
                         <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={handlePrev}
-                            className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                            disabled={isTransitioning}
+                            className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
                         >
                             <ChevronLeft className="w-6 h-6 text-slate-700 dark:text-slate-300" />
                         </motion.button>
 
-                        {/* Indicadores */}
                         <div className="flex items-center gap-2">
                             {testimonials.map((_, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => setActiveTestimonial(index)}
+                                    onClick={() => !isTransitioning && setActiveTestimonial(index)}
+                                    disabled={isTransitioning}
                                     className={`w-3 h-3 rounded-full transition-all duration-300 ${index === activeTestimonial
                                         ? 'w-8 bg-primary dark:bg-accent-mint'
                                         : 'bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'
-                                        }`}
+                                        } disabled:opacity-50`}
                                 />
                             ))}
                         </div>
@@ -222,14 +291,14 @@ const Testimonials = () => {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={handleNext}
-                            className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                            disabled={isTransitioning}
+                            className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
                         >
                             <ChevronRight className="w-6 h-6 text-slate-700 dark:text-slate-300" />
                         </motion.button>
                     </div>
                 </div>
 
-                {/* Logotipos de empresas */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
@@ -256,7 +325,7 @@ const Testimonials = () => {
                                 whileHover={{ scale: 1.1, opacity: 1 }}
                                 className="flex flex-col items-center gap-2"
                             >
-                                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center">
+                                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 rounded-2xl flex items-center justify-center">
                                     <div className="text-3xl">
                                         {industry.icon}
                                     </div>

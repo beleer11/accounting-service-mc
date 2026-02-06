@@ -2,9 +2,23 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MessageCircle, Calendar, Mail, FileText, Users, TrendingUp, Zap } from 'lucide-react';
 import { useWhatsApp } from '../../../hooks/useWhatsApp';
+import { useEffect } from 'react';
 
 const ServiceModal = ({ isOpen, onClose, service }) => {
     const { sendWhatsApp } = useWhatsApp();
+
+    // Prevenir scroll del body cuando el modal está abierto
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
 
     const getServiceMessage = (serviceTitle: string) => {
         const messages = {
@@ -73,112 +87,123 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
         }
     ];
 
-    if (!isOpen || !service) return null;
-
     return (
-        <AnimatePresence>
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <AnimatePresence mode="wait">
+            {isOpen && service && (
                 <motion.div
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    onClick={onClose}
-                    className="absolute inset-0 bg-black/70 backdrop-blur-md"
-                />
-
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                    className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
+                    transition={{ duration: 0.2 }}
                 >
-                    <div className="bg-gradient-to-r from-primary to-secondary p-6">
-                        <div className="flex justify-between items-start">
-                            <div>
-                                <h3 className="text-xl font-bold text-white">
-                                    Contactar por este servicio
-                                </h3>
-                                <p className="text-sm text-white/80 mt-1">
-                                    Elija la forma de contacto preferida
-                                </p>
-                            </div>
-                            <button
-                                onClick={onClose}
-                                className="p-2 hover:bg-white/20 rounded-lg transition-colors"
-                            >
-                                <X className="w-5 h-5 text-white" />
-                            </button>
-                        </div>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={onClose}
+                        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+                    />
 
-                    <div className="p-6 border-b border-slate-200 dark:border-slate-700">
-                        <div className="flex items-center gap-4 mb-4">
-                            <div className="p-3 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl">
-                                {getServiceIcon(service.title)}
-                            </div>
-                            <div className="flex-1">
-                                <h4 className="font-bold text-slate-900 dark:text-white text-lg">
-                                    {service.title}
-                                </h4>
-                                <div className="flex items-center gap-2 mt-1">
-                                    <span className="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-600 dark:text-slate-400 rounded">
-                                        Servicio profesional
-                                    </span>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                        transition={{
+                            type: "spring",
+                            damping: 25,
+                            stiffness: 300
+                        }}
+                        className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
+                    >
+                        <div className="bg-gradient-to-r from-primary to-secondary p-6">
+                            <div className="flex justify-between items-start">
+                                <div>
+                                    <h3 className="text-xl font-bold text-white">
+                                        Contactar por este servicio
+                                    </h3>
+                                    <p className="text-sm text-white/80 mt-1">
+                                        Elija la forma de contacto preferida
+                                    </p>
                                 </div>
+                                <button
+                                    onClick={onClose}
+                                    className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                                >
+                                    <X className="w-5 h-5 text-white" />
+                                </button>
                             </div>
                         </div>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">
-                            Seleccione cómo desea que nos contactemos con usted para brindarle información detallada.
-                        </p>
-                    </div>
 
-                    <div className="p-6 space-y-4">
-                        {contactOptions.map((option, index) => (
-                            <motion.button
-                                key={option.label}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ scale: 1.02, y: -2 }}
-                                whileTap={{ scale: 0.98 }}
-                                onClick={option.action}
-                                className={`w-full p-4 flex items-center gap-4 ${option.color} text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl text-left group`}
-                            >
-                                <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-                                    {option.icon}
+                        <div className="p-6 border-b border-slate-200 dark:border-slate-700">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="p-3 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl">
+                                    {getServiceIcon(service.title)}
                                 </div>
                                 <div className="flex-1">
-                                    <div className="font-bold text-white text-lg">
-                                        {option.label}
-                                    </div>
-                                    <div className="text-sm text-white/80">
-                                        {option.description}
+                                    <h4 className="font-bold text-slate-900 dark:text-white text-lg">
+                                        {service.title}
+                                    </h4>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <span className="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-600 dark:text-slate-400 rounded">
+                                            Servicio profesional
+                                        </span>
                                     </div>
                                 </div>
-                                <svg
-                                    className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
-                            </motion.button>
-                        ))}
-                    </div>
-
-                    <div className="p-6 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
-                        <div className="text-center">
-                            <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-                                <span className="font-medium">Horarios de atención:</span> Lunes a Viernes 8am - 6pm
-                            </p>
-                            <p className="text-xs text-slate-500 dark:text-slate-500">
-                                Nuestro equipo se pondrá en contacto en menos de 24 horas hábiles
+                            </div>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                                Seleccione cómo desea que nos contactemos con usted para brindarle información detallada.
                             </p>
                         </div>
-                    </div>
+
+                        <div className="p-6 space-y-4">
+                            {contactOptions.map((option, index) => (
+                                <motion.button
+                                    key={option.label}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    whileHover={{ scale: 1.02, y: -2 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={option.action}
+                                    className={`w-full p-4 flex items-center gap-4 ${option.color} text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl text-left group`}
+                                >
+                                    <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+                                        {option.icon}
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="font-bold text-white text-lg">
+                                            {option.label}
+                                        </div>
+                                        <div className="text-sm text-white/80">
+                                            {option.description}
+                                        </div>
+                                    </div>
+                                    <svg
+                                        className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </motion.button>
+                            ))}
+                        </div>
+
+                        <div className="p-6 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+                            <div className="text-center">
+                                <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
+                                    <span className="font-medium">Horarios de atención:</span> Lunes a Viernes 8am - 6pm
+                                </p>
+                                <p className="text-xs text-slate-500 dark:text-slate-500">
+                                    Nuestro equipo se pondrá en contacto en menos de 24 horas hábiles
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
                 </motion.div>
-            </div>
+            )}
         </AnimatePresence>
     );
 };
